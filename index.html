@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>batching operation</title>
+</head>
+<body>
+    <button onclick='makeCall(1)'>button 1</button>
+    <button onclick='makeCall(2)'>button 2</button>
+    <button onclick='makeCall(3)'>button 3</button>
+    <button onclick='makeCall(4)'>button 4</button>
+    <button onclick='makeCall(5)'>button 5</button>
+    <div id='resp'></div>
+    <button onclick="terminateBatch()">terminate batch</button>
+    <script src='./index.js'></script>
+    <script>
+        const container = document.getElementById('resp');
+        const makeCall = async (param) => {
+            try {
+                const response = await makeApiCall(param);
+                container.innerHTML += JSON.stringify(response);
+            }
+            catch(err) {
+                container.innerHTML += JSON.stringify(err);
+            }
+            
+        }
+        const terminateBatch = () => {
+            batchOne.terminate();
+        }
+    </script>
+</body>
+</html>
